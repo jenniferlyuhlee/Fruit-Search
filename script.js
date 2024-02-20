@@ -36,9 +36,15 @@ function showSuggestions(results, inputVal) {
 
 //populates input field with clicked suggestion
 function useSuggestion(e) {
-	input.value = e.target.innerText;
+	if (e.target.tagName === "LI"){
+		input.value = e.target.innerText;
+	}
+	//ensures that not only bold content displays, but the entire list content
+	else if (e.target.tagName === "STRONG"){
+		input.value = e.target.parentElement.innerText;
+	}
 	suggestions.innerText = null;
-}
+};
 
 input.addEventListener('keyup', searchHandler);
 suggestions.addEventListener('click', useSuggestion);
